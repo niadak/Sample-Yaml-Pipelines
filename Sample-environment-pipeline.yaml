@@ -1,0 +1,29 @@
+stages:
+- stage: Build
+  displayName: Build stage
+  jobs:  
+  - job: Build
+    displayName: Build job
+    pool: default
+    steps:
+    - script: echo Hello, world!
+      displayName: 'Run a one-line script'
+
+    - script: |
+        echo Add other tasks to build, test, and deploy your project.
+        echo See https://aka.ms/yaml
+      displayName: 'Run a multi-line script'
+
+- stage: Deploy
+  displayName: Deploy stage
+  jobs:  
+  - deployment: Deploy
+    displayName: Deploy job
+    pool: default
+    environment: Environment01
+    strategy:
+        runOnce:
+          deploy:
+            steps:
+              - script: echo Hello, world! This is deploy job
+                displayName: 'Run a one-line script'

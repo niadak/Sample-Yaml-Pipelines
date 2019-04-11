@@ -1,0 +1,29 @@
+stages:
+- stage: Build
+  displayName: Build stage
+  jobs:  
+  - job: Build
+    displayName: Build job
+    pool: default
+    steps:
+    - script: echo Hello, world!
+      displayName: 'Run a one-line script'
+
+    - script: |
+        echo Add other tasks to build, test, and deploy your project.
+        echo See https://aka.ms/yaml
+      displayName: 'Run a multi-line script'
+
+- stage: Deploy
+  displayName: Deploy stage
+  jobs:  
+  - deployment: VMDeploy
+    displayName: Deploy to VM job
+    environment: Environment01.VMGroup01
+    strategy:
+      rolling:
+        maxBatchSize: 2
+        deploy:
+          steps:
+            - script: echo Hello, world! This is deploy job
+              displayName: 'Run a one-line script'

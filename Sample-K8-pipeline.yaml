@@ -1,0 +1,37 @@
+stages:
+- stage: Build
+  displayName: Build stage
+  jobs:  
+  - job: Build
+    displayName: Build job
+    pool: default
+    steps:
+    - script: echo Hello, world!
+      displayName: 'Run a one-line script'
+
+    - script: |
+        echo Add other tasks to build, test, and deploy your project.
+        echo See https://aka.ms/yaml
+      displayName: 'Run a multi-line script'
+
+- stage: Deploy
+  displayName: Deploy stage
+  jobs:  
+  - deployment: K8Deploy
+    displayName: Deploy to K8 job
+    pool: default
+    environment: Environment01.default
+    strategy:
+        runOnce:
+          deploy:
+            steps:
+              - script: echo Hello, world! This is deploy job
+                displayName: 'Run a one-line script'
+
+              - task: Kubernetes@1
+                displayName: 'kubectl get'
+                inputs:
+                  connectionType: 'Kubernetes Service Connection'
+                  namespace: 'default'
+                  command: get
+                  arguments: pods
