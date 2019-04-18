@@ -21,7 +21,6 @@ stages:
   displayName: QA stage
   jobs:
   - job: dummyJob
-    pool: default
     steps:
       - script: echo Hello, world! This is dummy job
         displayName: 'Run a one-line script'
