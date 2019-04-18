@@ -4,7 +4,7 @@ stages:
   jobs:  
   - job: Build
     displayName: Build job
-    pool: default
+    pool: niadak
     steps:
     - script: echo Hello, world! This is CI job
       displayName: 'Run a one-line script'
@@ -22,7 +22,7 @@ stages:
   displayName: QA stage
   jobs:
   - job: dummyJob
-    pool: default
+    pool: niadak
     steps:
       - checkout: none
       - script: echo Hello, world! This is dummy job
@@ -30,7 +30,7 @@ stages:
       - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
       
   - job: dummyJob4
-    pool: default
+    pool: niadak
     steps:
       - download: current
         artifact: artifact1
@@ -44,7 +44,7 @@ stages:
   jobs:  
   - deployment: Deploy
     displayName: Deploy job
-    pool: default
+    pool: niadak
     environment: NiadakEnvironment01
     strategy:
         runOnce:
@@ -68,7 +68,7 @@ stages:
 
   # - deployment: Deploy2
   #   displayName: Deploy2 job
-  #   pool: default
+  #   pool: niadak
   #   environment: NiadakEnvironment01
   #   strategy:
   #       runOnce:
@@ -92,7 +92,7 @@ stages:
 
   # - deployment: Deploy3
   #   displayName: Deploy3 job
-  #   pool: default
+  #   pool: niadak
   #   environment: NiadakEnvironment01
   #   strategy:
   #       runOnce:
