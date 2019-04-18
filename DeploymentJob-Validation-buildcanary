@@ -24,7 +24,6 @@ stages:
   - job: dummyJob
     pool: niadak
     steps:
-      - checkout: none
       - script: echo Hello, world! This is dummy job
         displayName: 'Run a one-line script'
       - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
@@ -35,9 +34,6 @@ stages:
       - download: current
         artifact: artifact1
       - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
-      - powershell: |
-          Remove-Item $(Pipeline.Workspace)\artifact1 -Recurse -Force
-        displayName: Scorch workspace
 
 - stage: Deploy
   displayName: Deploy stage
@@ -54,11 +50,6 @@ stages:
                 displayName: 'Run a one-line script'
               - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
                 displayName: Explore workspace
-
-              - powershell: |
-                  Remove-Item $(Pipeline.Workspace)\Artifact1 -Recurse -Force
-                  Remove-Item $(Pipeline.Workspace)\Artifact2 -Recurse -Force
-                displayName: Scorch workspace
 
               - task: PublishPipelineArtifact@0
                 displayName: Create Artifact
@@ -79,11 +70,6 @@ stages:
               - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
                 displayName: Explore workspace
 
-              - powershell: |
-                  Remove-Item $(Pipeline.Workspace)\Artifact1 -Recurse -Force
-                  Remove-Item $(Pipeline.Workspace)\Artifact2 -Recurse -Force
-                displayName: Scorch workspace
-
   - deployment: Deploy3
     displayName: Deploy3 job
     pool: niadak
@@ -96,9 +82,4 @@ stages:
                 displayName: 'Run a one-line script'
               - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
                 displayName: Explore workspace
-
-              - powershell: |
-                  Remove-Item $(Pipeline.Workspace)\Artifact1 -Recurse -Force
-                  Remove-Item $(Pipeline.Workspace)\Artifact2 -Recurse -Force
-                displayName: Scorch workspace
 
