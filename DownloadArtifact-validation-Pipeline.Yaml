@@ -1,0 +1,162 @@
+stages:
+- stage: Build
+  displayName: Build stage
+  jobs:  
+  - job: Build
+    displayName: Build job
+    steps:
+    - script: echo Hello, world! This is CI job
+      displayName: 'Run a one-line script'
+
+    - task: PublishPipelineArtifact@0
+      displayName: Create Artifact
+      inputs:
+        artifactName: Artifact1
+        targetPath: Test
+
+    - upload: Sample-pipeline.yaml
+      artifact: Artifact2
+
+- stage: QA
+  displayName: QA stage
+  jobs:
+  - job: dummyJob
+    pool: default
+    steps:
+      - script: echo Hello, world! This is dummy job
+        displayName: 'Run a one-line script'
+      - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
+
+  - job: dummyJob2
+    steps:
+      - download: current
+        path: foo
+      - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
+      - powershell: |
+          Remove-Item $(Pipeline.Workspace)\foo -Recurse -Force
+        displayName: Scorch workspace
+
+  - job: dummyJob3
+    steps:
+      - download: current
+        artifact: artifact1
+        path: bar
+        patterns: '*.md'
+      - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
+      - powershell: |
+          Remove-Item $(Pipeline.Workspace)\bar -Recurse -Force
+        displayName: Scorch workspace
+
+  - job: dummyJob4
+    steps:
+      - download: current
+        artifact: artifact1
+      - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
+      - powershell: |
+          Remove-Item $(Pipeline.Workspace)\artifact1 -Recurse -Force
+        displayName: Scorch workspace
+
+- stage: Deploy
+  displayName: Deploy stage
+  jobs:  
+  - deployment: Deploy
+    displayName: Deploy job
+    environment: NiadakEnvironment01
+    strategy:
+        runOnce:
+          deploy:
+            steps:
+              - script: echo Hello, world! This is deploy job
+                displayName: 'Run a one-line script'
+              - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
+                displayName: Explore workspace
+
+              - powershell: |
+                  Remove-Item $(Pipeline.Workspace)\Artifact1 -Recurse -Force
+                  Remove-Item $(Pipeline.Workspace)\Artifact2 -Recurse -Force
+                displayName: Scorch workspace
+
+              - task: PublishPipelineArtifact@0
+                displayName: Create Artifact
+                inputs:
+                  artifactName: AzCopy
+                  targetPath: azcopy
+
+  - deployment: Deploy2
+    displayName: Deploy2 job
+    environment: NiadakEnvironment01
+    dependsOn: Deploy
+    strategy:
+        runOnce:
+          deploy:
+            steps:
+              - script: echo Hello, world! This is deploy job
+                displayName: 'Run a one-line script'
+              - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
+                displayName: Explore workspace
+
+              - powershell: |
+                  Remove-Item $(Pipeline.Workspace)\Artifact1 -Recurse -Force
+                  Remove-Item $(Pipeline.Workspace)\Artifact2 -Recurse -Force
+                  Remove-Item $(Pipeline.Workspace)\Azcopy -Recurse -Force
+                displayName: Scorch workspace
+  
+  - deployment: Deploy3
+    displayName: Deploy3 job
+    environment: NiadakEnvironment01
+    dependsOn: Deploy
+    strategy:
+        runOnce:
+          deploy:
+            steps:      
+            - download: current
+              path: foo
+            - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
+            - powershell: |
+                Remove-Item $(Pipeline.Workspace)\foo -Recurse -Force
+              displayName: Scorch workspace
+
+  - deployment: Deploy4
+    displayName: Deploy4 job
+    environment: NiadakEnvironment01
+    dependsOn: Deploy
+    strategy:
+        runOnce:
+          deploy:
+            steps:
+            - download: current
+              artifact: artifact1
+              path: bar
+              patterns: '*.md'
+            - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
+            - powershell: |
+                Remove-Item $(Pipeline.Workspace)\bar -Recurse -Force
+              displayName: Scorch workspace
+
+  - deployment: Deploy5
+    displayName: Deploy5 job
+    environment: NiadakEnvironment01
+    dependsOn: Deploy
+    strategy:
+        runOnce:
+          deploy:
+            steps:
+            - download: current
+              artifact: artifact1
+            - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
+            - powershell: |
+                Remove-Item $(Pipeline.Workspace)\artifact1 -Recurse -Force
+              displayName: Scorch workspace
+            
+   - deployment: DeployOnServer
+     displayName: Deploy server job
+     pool: server
+     environment: NiadakEnvironment01
+     strategy:
+         runOnce:
+           deploy:
+             steps:
+             - task: Delay@1
+               inputs:
+                 delayForMinutes: '1' 
+                
