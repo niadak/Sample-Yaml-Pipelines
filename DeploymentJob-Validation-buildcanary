@@ -26,14 +26,12 @@ stages:
     steps:
       - script: echo Hello, world! This is dummy job
         displayName: 'Run a one-line script'
-      - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
       
   - job: dummyJob4
     pool: niadak
     steps:
       - download: current
         artifact: artifact1
-      - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
 
 - stage: Deploy
   displayName: Deploy stage
@@ -48,8 +46,6 @@ stages:
             steps:
               - script: echo Hello, world! This is deploy job
                 displayName: 'Run a one-line script'
-              - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
-                displayName: Explore workspace
 
               - task: PublishPipelineArtifact@0
                 displayName: Create Artifact
@@ -67,8 +63,6 @@ stages:
             steps:
               - script: echo Hello, world! This is deploy job
                 displayName: 'Run a one-line script'
-              - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
-                displayName: Explore workspace
 
   - deployment: Deploy3
     displayName: Deploy3 job
@@ -80,6 +74,4 @@ stages:
             steps:
               - script: echo Hello, world! This is deploy job
                 displayName: 'Run a one-line script'
-              - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
-                displayName: Explore workspace
 
