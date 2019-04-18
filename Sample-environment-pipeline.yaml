@@ -20,7 +20,7 @@ stages:
   - deployment: Deploy
     displayName: Deploy job
     pool: default
-    environment: Environment01
+    environment: ch-Environment01
     strategy:
         runOnce:
           deploy:
