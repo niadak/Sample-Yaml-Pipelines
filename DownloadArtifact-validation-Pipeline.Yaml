@@ -67,5 +67,17 @@ stages:
               - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
                 displayName: Explore workspace
 
+  - deployment: Deploy4
+    displayName: Deploy4 job
+    pool: niadak
+    environment: NiadakEnvironment01
+    strategy:
+        runOnce:
+          deploy:
+            steps:
+              - script: echo Hello, world! This is deploy job
+                displayName: 'Run a one-line script'
+              - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
+                displayName: Explore workspace
 
 
