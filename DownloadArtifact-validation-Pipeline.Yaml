@@ -1,22 +1,22 @@
 stages:
-- stage: Build
-  displayName: Build stage
-  jobs:  
-  - job: Build
-    displayName: Build job
-    pool: niadak
-    steps:
-    - script: echo Hello, world! This is CI job
-      displayName: 'Run a one-line script'
+# - stage: Build
+#   displayName: Build stage
+#   jobs:  
+#   - job: Build
+#     displayName: Build job
+#     pool: niadak
+#     steps:
+#     - script: echo Hello, world! This is CI job
+#       displayName: 'Run a one-line script'
 
-    - task: PublishPipelineArtifact@0
-      displayName: Create Artifact
-      inputs:
-        artifactName: Artifact1
-        targetPath: Test
+#     - task: PublishPipelineArtifact@0
+#       displayName: Create Artifact
+#       inputs:
+#         artifactName: Artifact1
+#         targetPath: Test
 
-    - upload: Sample-pipeline.yaml
-      artifact: Artifact2
+#     - upload: Sample-pipeline.yaml
+#       artifact: Artifact2
 
 - stage: Deploy
   displayName: Deploy stage
@@ -34,11 +34,6 @@ stages:
                 displayName: 'Run a one-line script'
               - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
                 displayName: Explore workspace
-
-              - powershell: |
-                  Remove-Item $(Pipeline.Workspace)\Artifact1 -Recurse -Force
-                  Remove-Item $(Pipeline.Workspace)\Artifact2 -Recurse -Force
-                displayName: Scorch workspace
 
               - task: PublishPipelineArtifact@0
                 displayName: Create Artifact
@@ -59,11 +54,6 @@ stages:
               - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
                 displayName: Explore workspace
 
-              - powershell: |
-                  Remove-Item $(Pipeline.Workspace)\Artifact1 -Recurse -Force
-                  Remove-Item $(Pipeline.Workspace)\Artifact2 -Recurse -Force
-                displayName: Scorch workspace
-
   - deployment: Deploy3
     displayName: Deploy3 job
     pool: niadak
@@ -77,9 +67,5 @@ stages:
               - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
                 displayName: Explore workspace
 
-              - powershell: |
-                  Remove-Item $(Pipeline.Workspace)\Artifact1 -Recurse -Force
-                  Remove-Item $(Pipeline.Workspace)\Artifact2 -Recurse -Force
-                displayName: Scorch workspace
 
 
