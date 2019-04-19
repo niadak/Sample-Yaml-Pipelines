@@ -29,7 +29,7 @@ stages:
         runOnce:
           deploy:
             steps:
-              - checkout: none
+              - checkout: self
               - script: echo Hello, world! This is deploy job
                 displayName: 'Run a one-line script'
               - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
@@ -64,12 +64,6 @@ stages:
                   Remove-Item $(Pipeline.Workspace)\Artifact2 -Recurse -Force
                 displayName: Scorch workspace
 
-              - task: PublishPipelineArtifact@0
-                displayName: Create Artifact
-                inputs:
-                  artifactName: AzCopy
-                  targetPath: azcopy
-
   - deployment: Deploy3
     displayName: Deploy3 job
     pool: niadak
@@ -88,9 +82,4 @@ stages:
                   Remove-Item $(Pipeline.Workspace)\Artifact2 -Recurse -Force
                 displayName: Scorch workspace
 
-              - task: PublishPipelineArtifact@0
-                displayName: Create Artifact
-                inputs:
-                  artifactName: AzCopy
-                  targetPath: azcopy
 
