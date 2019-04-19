@@ -29,7 +29,7 @@ stages:
         runOnce:
           deploy:
             steps:
-              - checkout:
+              - checkout: self
               - script: echo Hello, world! This is deploy job
                 displayName: 'Run a one-line script'
               - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
