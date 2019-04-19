@@ -29,10 +29,17 @@ stages:
         runOnce:
           deploy:
             steps:
+              - checkout: self
               - script: echo Hello, world! This is deploy job
                 displayName: 'Run a one-line script'
               - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
                 displayName: Explore workspace
+
+              - task: PublishPipelineArtifact@0
+                displayName: Create Artifact
+                inputs:
+                  artifactName: Artifact1
+                  targetPath: Test
 
   # - deployment: Deploy2
   #   displayName: Deploy2 job
