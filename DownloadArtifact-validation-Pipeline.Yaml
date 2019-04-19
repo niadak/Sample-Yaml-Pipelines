@@ -43,6 +43,7 @@ stages:
 
   - deployment: Deploy2
     displayName: Deploy2 job
+    dependsOn: Deploy
     pool: niadak
     environment: NiadakEnvironment01
     strategy:
