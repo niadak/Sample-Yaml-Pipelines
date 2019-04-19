@@ -10,7 +10,6 @@ stages:
   #     displayName: 'Run a one-line script'
   - deployment: Deploy2
     displayName: Deploy2 job
-    dependsOn: Deploy
     pool: niadak
     environment: NiadakEnvironment01
     strategy:
