@@ -1,13 +1,13 @@
 stages:
-- stage: Build
-  displayName: Build stage
-  jobs:  
-  - job: Build
-    displayName: Build job
-    pool: niadak
-    steps:
-    - script: echo Hello, world! This is CI job
-      displayName: 'Run a one-line script'
+# - stage: Build
+#   displayName: Build stage
+#   jobs:  
+#   - job: Build
+#     displayName: Build job
+#     pool: niadak
+#     steps:
+#     - script: echo Hello, world! This is CI job
+#       displayName: 'Run a one-line script'
 
     # - task: PublishPipelineArtifact@0
     #   displayName: Create Artifact
