@@ -2,12 +2,12 @@ stages:
 - stage: Build
   displayName: Build stage
   jobs:  
-  # - job: Build
-  #   displayName: Build job
-  #   pool: niadak
-  #   steps:
-  #   - script: echo Hello, world! This is CI job
-  #     displayName: 'Run a one-line script'
+  - job: Build
+    displayName: Build job
+    pool: niadak
+    steps:
+    - script: echo Hello, world! This is CI job
+      displayName: 'Run a one-line script'
   - deployment: Deploy2
     displayName: Deploy2 job
     pool: niadak
