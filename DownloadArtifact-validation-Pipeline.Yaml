@@ -1,13 +1,26 @@
 stages:
-# - stage: Build
-#   displayName: Build stage
-#   jobs:  
-#   - job: Build
-#     displayName: Build job
-#     pool: niadak
-#     steps:
-#     - script: echo Hello, world! This is CI job
-#       displayName: 'Run a one-line script'
+- stage: Build
+  displayName: Build stage
+  jobs:  
+  # - job: Build
+  #   displayName: Build job
+  #   pool: niadak
+  #   steps:
+  #   - script: echo Hello, world! This is CI job
+  #     displayName: 'Run a one-line script'
+  - deployment: Deploy2
+    displayName: Deploy2 job
+    dependsOn: Deploy
+    pool: niadak
+    environment: NiadakEnvironment01
+    strategy:
+        runOnce:
+          deploy:
+            steps:
+              - script: echo Hello, world! This is deploy job
+                displayName: 'Run a one-line script'
+              - powershell: sleep(60)
+                displayName: Explore workspace
 
     # - task: PublishPipelineArtifact@0
     #   displayName: Create Artifact
@@ -32,7 +45,7 @@ stages:
               - checkout: self
               - script: echo Hello, world! This is deploy job
                 displayName: 'Run a one-line script'
-              - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
+              - powershell: sleep(60)
                 displayName: Explore workspace
 
               - task: PublishPipelineArtifact@0
@@ -40,20 +53,6 @@ stages:
                 inputs:
                   artifactName: Artifact1
                   targetPath: Test
-
-  - deployment: Deploy2
-    displayName: Deploy2 job
-    dependsOn: Deploy
-    pool: niadak
-    environment: NiadakEnvironment01
-    strategy:
-        runOnce:
-          deploy:
-            steps:
-              - script: echo Hello, world! This is deploy job
-                displayName: 'Run a one-line script'
-              - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
-                displayName: Explore workspace
 
   # - deployment: Deploy3
   #   displayName: Deploy3 job
