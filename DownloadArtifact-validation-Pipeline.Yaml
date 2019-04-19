@@ -18,48 +18,6 @@ stages:
     - upload: Sample-pipeline.yaml
       artifact: Artifact2
 
-- stage: QA
-  displayName: QA stage
-  jobs:
-  - job: dummyJob
-    pool: niadak
-    steps:
-      - checkout: none
-      - script: echo Hello, world! This is dummy job
-        displayName: 'Run a one-line script'
-      - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
-
-  # - job: dummyJob2
-  #   steps:
-  #     - checkout: none
-  #     - download: current
-  #       path: foo
-  #     - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
-  #     - powershell: |
-  #         Remove-Item $(Pipeline.Workspace)\foo -Recurse -Force
-  #       displayName: Scorch workspace
-
-  # - job: dummyJob3
-  #   steps:
-  #     - download: current
-  #       artifact: artifact1
-  #       path: bar
-  #       patterns: '*.md'
-  #     - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
-  #     - powershell: |
-  #         Remove-Item $(Pipeline.Workspace)\bar -Recurse -Force
-  #       displayName: Scorch workspace
-
-  - job: dummyJob4
-    pool: niadak
-    steps:
-      - download: current
-        artifact: artifact1
-      - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
-      - powershell: |
-          Remove-Item $(Pipeline.Workspace)\artifact1 -Recurse -Force
-        displayName: Scorch workspace
-
 - stage: Deploy
   displayName: Deploy stage
   jobs:  
@@ -87,51 +45,51 @@ stages:
                   artifactName: AzCopy
                   targetPath: azcopy
 
-  - deployment: Deploy2
-    displayName: Deploy2 job
-    pool: niadak
-    environment: NiadakEnvironment01
-    strategy:
-        runOnce:
-          deploy:
-            steps:
-              - script: echo Hello, world! This is deploy job
-                displayName: 'Run a one-line script'
-              - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
-                displayName: Explore workspace
+  # - deployment: Deploy2
+  #   displayName: Deploy2 job
+  #   pool: niadak
+  #   environment: NiadakEnvironment01
+  #   strategy:
+  #       runOnce:
+  #         deploy:
+  #           steps:
+  #             - script: echo Hello, world! This is deploy job
+  #               displayName: 'Run a one-line script'
+  #             - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
+  #               displayName: Explore workspace
 
-              - powershell: |
-                  Remove-Item $(Pipeline.Workspace)\Artifact1 -Recurse -Force
-                  Remove-Item $(Pipeline.Workspace)\Artifact2 -Recurse -Force
-                displayName: Scorch workspace
+  #             - powershell: |
+  #                 Remove-Item $(Pipeline.Workspace)\Artifact1 -Recurse -Force
+  #                 Remove-Item $(Pipeline.Workspace)\Artifact2 -Recurse -Force
+  #               displayName: Scorch workspace
 
-              - task: PublishPipelineArtifact@0
-                displayName: Create Artifact
-                inputs:
-                  artifactName: AzCopy
-                  targetPath: azcopy
+  #             - task: PublishPipelineArtifact@0
+  #               displayName: Create Artifact
+  #               inputs:
+  #                 artifactName: AzCopy
+  #                 targetPath: azcopy
 
-  - deployment: Deploy3
-    displayName: Deploy3 job
-    pool: niadak
-    environment: NiadakEnvironment01
-    strategy:
-        runOnce:
-          deploy:
-            steps:
-              - script: echo Hello, world! This is deploy job
-                displayName: 'Run a one-line script'
-              - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
-                displayName: Explore workspace
+  # - deployment: Deploy3
+  #   displayName: Deploy3 job
+  #   pool: niadak
+  #   environment: NiadakEnvironment01
+  #   strategy:
+  #       runOnce:
+  #         deploy:
+  #           steps:
+  #             - script: echo Hello, world! This is deploy job
+  #               displayName: 'Run a one-line script'
+  #             - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
+  #               displayName: Explore workspace
 
-              - powershell: |
-                  Remove-Item $(Pipeline.Workspace)\Artifact1 -Recurse -Force
-                  Remove-Item $(Pipeline.Workspace)\Artifact2 -Recurse -Force
-                displayName: Scorch workspace
+  #             - powershell: |
+  #                 Remove-Item $(Pipeline.Workspace)\Artifact1 -Recurse -Force
+  #                 Remove-Item $(Pipeline.Workspace)\Artifact2 -Recurse -Force
+  #               displayName: Scorch workspace
 
-              - task: PublishPipelineArtifact@0
-                displayName: Create Artifact
-                inputs:
-                  artifactName: AzCopy
-                  targetPath: azcopy
+  #             - task: PublishPipelineArtifact@0
+  #               displayName: Create Artifact
+  #               inputs:
+  #                 artifactName: AzCopy
+  #                 targetPath: azcopy
 
