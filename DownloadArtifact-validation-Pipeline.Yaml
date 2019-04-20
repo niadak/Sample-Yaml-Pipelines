@@ -13,14 +13,38 @@ stages:
               - script: echo Hello, world! This is deploy job
                 displayName: 'Run a one-line script'
 
-    # - task: PublishPipelineArtifact@0
-    #   displayName: Create Artifact
-    #   inputs:
-    #     artifactName: Artifact1
-    #     targetPath: Test
+- stage: Build1
+  displayName: Build1 stage
+  jobs:  
+  - job: Build
+    displayName: Build job
+    pool: niadak
+    steps:
+    - script: echo Hello, world! This is CI job
+      displayName: 'Run a one-line script'
 
-    # - upload: Sample-pipeline.yaml
-    #   artifact: Artifact2
+- stage: Build2
+  displayName: Build2 stage
+  jobs:  
+  - job: Build
+    displayName: Build job
+    pool: niadak
+    steps:
+    - script: echo Hello, world! This is CI job
+      displayName: 'Run a one-line script'
+    - powershell: sleep(60)
+
+- stage: Build3
+  displayName: Build3 stage
+  jobs:  
+  - job: Build
+    displayName: Build job
+    pool: niadak
+    steps:
+    - script: echo Hello, world! This is CI job
+      displayName: 'Run a one-line script'
+    - powershell: sleep(60)
+
 
 - stage: Deploy
   displayName: Deploy stage
