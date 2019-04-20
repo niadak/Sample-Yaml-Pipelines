@@ -32,7 +32,13 @@ stages:
 
 - stage: Deploy
   displayName: Deploy stage
-  jobs:  
+  jobs:
+  - job: Build
+    displayName: Build job
+    pool: niadak
+    steps:
+    - script: echo Hello, world! This is CI job
+      displayName: 'Run a one-line script'
   - deployment: Deploy
     displayName: Deploy job
     pool: niadak
