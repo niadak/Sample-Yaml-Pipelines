@@ -1,25 +1,25 @@
 stages:
-- stage: Build
-  displayName: Build stage
-  jobs:  
-  - job: Build
-    displayName: Build job
-    pool: niadak
-    steps:
-    - script: echo Hello, world! This is CI job
-      displayName: 'Run a one-line script'
-  - deployment: Deploy2
-    displayName: Deploy2 job
-    pool: niadak
-    environment: NiadakEnvironment01
-    strategy:
-        runOnce:
-          deploy:
-            steps:
-              - script: echo Hello, world! This is deploy job
-                displayName: 'Run a one-line script'
-              - powershell: sleep(60)
-                displayName: Explore workspace
+# - stage: Build
+#   displayName: Build stage
+#   jobs:  
+#   - job: Build
+#     displayName: Build job
+#     pool: niadak
+#     steps:
+#     - script: echo Hello, world! This is CI job
+#       displayName: 'Run a one-line script'
+#   - deployment: Deploy2
+#     displayName: Deploy2 job
+#     pool: niadak
+#     environment: NiadakEnvironment01
+#     strategy:
+#         runOnce:
+#           deploy:
+#             steps:
+#               - script: echo Hello, world! This is deploy job
+#                 displayName: 'Run a one-line script'
+#               - powershell: sleep(60)
+#                 displayName: Explore workspace
 
     # - task: PublishPipelineArtifact@0
     #   displayName: Create Artifact
