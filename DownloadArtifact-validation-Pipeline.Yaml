@@ -1,49 +1,49 @@
 stages:
-- stage: Build
-  displayName: Build stage
-  jobs:  
-  - deployment: Deploy2
-    displayName: Deploy2 job
-    pool: niadak
-    environment: NiadakEnvironment01
-    strategy:
-        runOnce:
-          deploy:
-            steps:
-              - script: echo Hello, world! This is deploy job
-                displayName: 'Run a one-line script'
+# - stage: Build
+#   displayName: Build stage
+#   jobs:  
+#   - deployment: Deploy2
+#     displayName: Deploy2 job
+#     pool: niadak
+#     environment: NiadakEnvironment01
+#     strategy:
+#         runOnce:
+#           deploy:
+#             steps:
+#               - script: echo Hello, world! This is deploy job
+#                 displayName: 'Run a one-line script'
 
-- stage: Build1
-  displayName: Build1 stage
-  jobs:  
-  - job: Build
-    displayName: Build job
-    pool: niadak
-    steps:
-    - script: echo Hello, world! This is CI job
-      displayName: 'Run a one-line script'
+# - stage: Build1
+#   displayName: Build1 stage
+#   jobs:  
+#   - job: Build
+#     displayName: Build job
+#     pool: niadak
+#     steps:
+#     - script: echo Hello, world! This is CI job
+#       displayName: 'Run a one-line script'
 
-- stage: Build2
-  displayName: Build2 stage
-  jobs:  
-  - job: Build
-    displayName: Build job
-    pool: niadak
-    steps:
-    - script: echo Hello, world! This is CI job
-      displayName: 'Run a one-line script'
-    - powershell: sleep(60)
+# - stage: Build2
+#   displayName: Build2 stage
+#   jobs:  
+#   - job: Build
+#     displayName: Build job
+#     pool: niadak
+#     steps:
+#     - script: echo Hello, world! This is CI job
+#       displayName: 'Run a one-line script'
+#     - powershell: sleep(60)
 
-- stage: Build3
-  displayName: Build3 stage
-  jobs:  
-  - job: Build
-    displayName: Build job
-    pool: niadak
-    steps:
-    - script: echo Hello, world! This is CI job
-      displayName: 'Run a one-line script'
-    - powershell: sleep(60)
+# - stage: Build3
+#   displayName: Build3 stage
+#   jobs:  
+#   - job: Build
+#     displayName: Build job
+#     pool: niadak
+#     steps:
+#     - script: echo Hello, world! This is CI job
+#       displayName: 'Run a one-line script'
+#     - powershell: sleep(60)
 
 
 - stage: Deploy
