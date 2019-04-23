@@ -65,9 +65,7 @@ stages:
             steps:
               - checkout: self
               - script: echo Hello, world! This is deploy job
-                displayName: 'Run a one-line script'
-              - powershell: sleep(60)
-                displayName: Explore workspace
+                displayName: 'Run a one-line script
 
               - task: PublishPipelineArtifact@0
                 displayName: Create Artifact
