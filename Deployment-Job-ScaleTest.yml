@@ -1,0 +1,15 @@
+stages:
+- stage: Deploy
+  displayName: Deploy stage
+  jobs:  
+  - deployment: Deploy1
+    displayName: Deploy1 job
+    pool: server
+    environment: TestEnvironment01
+    strategy:
+        runOnce:
+          deploy:
+            steps:
+              - task: Delay@1
+                inputs:
+				          delayForMinutes: '1' 
