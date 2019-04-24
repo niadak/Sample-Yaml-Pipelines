@@ -12,4 +12,52 @@ stages:
           steps:
           - task: Delay@1
             inputs:
-              delayForMinutes: '1' 
+              delayForMinutes: '1'
+
+  - deployment: Deploy2
+    displayName: Deploy2 job
+    pool: server
+    environment: TestEnvironment01
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: Delay@1
+            inputs:
+              delayForMinutes: '1'
+
+  - deployment: Deploy3
+    displayName: Deploy3 job
+    pool: server
+    environment: TestEnvironment01
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: Delay@1
+            inputs:
+              delayForMinutes: '1'
+
+  - deployment: Deploy4
+    displayName: Deploy4 job
+    pool: server
+    environment: TestEnvironment01
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: Delay@1
+            inputs:
+              delayForMinutes: '1'
+
+  - deployment: Deploy5
+    displayName: Deploy5 job
+    pool: server
+    environment: TestEnvironment01
+    strategy:
+      runOnce:
+        deploy:
+          steps:
+          - task: Delay@1
+            inputs:
+              delayForMinutes: '1'
