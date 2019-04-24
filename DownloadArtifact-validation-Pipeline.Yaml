@@ -1,9 +1,4 @@
 stages:
-- stage: Build
-  displayName: Build stage
-  jobs:  
-  - use: node
-
 # - stage: Build1
 #   displayName: Build1 stage
 #   jobs:  
