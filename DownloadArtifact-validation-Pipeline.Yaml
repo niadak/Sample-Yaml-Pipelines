@@ -1,17 +1,8 @@
 stages:
-# - stage: Build
-#   displayName: Build stage
-#   jobs:  
-#   - deployment: Deploy2
-#     displayName: Deploy2 job
-#     pool: niadak
-#     environment: NiadakEnvironment01
-#     strategy:
-#         runOnce:
-#           deploy:
-#             steps:
-#               - script: echo Hello, world! This is deploy job
-#                 displayName: 'Run a one-line script'
+- stage: Build
+  displayName: Build stage
+  jobs:  
+  - use: node
 
 # - stage: Build1
 #   displayName: Build1 stage
