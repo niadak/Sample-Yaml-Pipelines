@@ -7,9 +7,9 @@ stages:
     pool: server
     environment: TestEnvironment01
     strategy:
-        runOnce:
-          deploy:
-            steps:
-              - task: Delay@1
-                inputs:
-				          delayForMinutes: '1' 
+      runOnce:
+        deploy:
+          steps:
+          - task: Delay@1
+            inputs:
+              delayForMinutes: '1' 
