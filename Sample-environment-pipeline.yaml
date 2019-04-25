@@ -20,7 +20,7 @@ stages:
   - deployment: Deploy
     displayName: Deploy job
     pool: default
-    environment: ch-Environment01
+    environment: NiadakEnvironment01
     strategy:
         runOnce:
           deploy:
