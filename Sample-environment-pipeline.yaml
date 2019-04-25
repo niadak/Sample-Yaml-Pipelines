@@ -27,4 +27,3 @@ stages:
             steps:
               - script: echo Hello, world! This is deploy job
                 displayName: 'Run a one-line script'
-              - powershell: Wtrite-Host 'Good day'
