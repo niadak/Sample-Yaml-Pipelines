@@ -4,7 +4,7 @@ stages:
   jobs:  
   - job: Build
     displayName: Build job
-    pool: default
+   # pool: default
     steps:
     - script: echo Hello, world!
       displayName: 'Run a one-line script'
@@ -19,7 +19,7 @@ stages:
   jobs:  
   - deployment: Deploy
     displayName: Deploy job
-    pool: default
+   # pool: default
     environment: NiadakEnvironment01
     strategy:
         runOnce:
