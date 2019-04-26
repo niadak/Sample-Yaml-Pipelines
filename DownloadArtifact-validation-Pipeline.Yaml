@@ -15,9 +15,6 @@ stages:
         artifactName: Artifact1
         targetPath: Test
 
-    - upload: DownloadArtifact-validation-Pipeline.Yaml
-      artifact: Artifact2
-
 - stage: Deploy
   displayName: Deploy stage
   jobs:
