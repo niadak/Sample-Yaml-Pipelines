@@ -1,46 +1,26 @@
 stages:
-# - stage: Build1
-#   displayName: Build1 stage
-#   jobs:  
-#   - job: Build
-#     displayName: Build job
-#     pool: niadak
-#     steps:
-#     - script: echo Hello, world! This is CI job
-#       displayName: 'Run a one-line script'
+- stage: Build
+  displayName: Build1 stage
+  jobs:  
+  - job: Build
+    displayName: Build job
+    pool: niadak
+    steps:
+    - script: echo Hello, world! This is CI job
+      displayName: 'Run a one-line script'
 
-# - stage: Build2
-#   displayName: Build2 stage
-#   jobs:  
-#   - job: Build
-#     displayName: Build job
-#     pool: niadak
-#     steps:
-#     - script: echo Hello, world! This is CI job
-#       displayName: 'Run a one-line script'
-#     - powershell: sleep(60)
+    - task: PublishPipelineArtifact@0
+      displayName: Create Artifact
+      inputs:
+        artifactName: Artifact1
+        targetPath: Test
 
-# - stage: Build3
-#   displayName: Build3 stage
-#   jobs:  
-#   - job: Build
-#     displayName: Build job
-#     pool: niadak
-#     steps:
-#     - script: echo Hello, world! This is CI job
-#       displayName: 'Run a one-line script'
-#     - powershell: sleep(60)
-
+    - upload: DownloadArtifact-validation-Pipeline.Yaml
+      artifact: Artifact2
 
 - stage: Deploy
   displayName: Deploy stage
   jobs:
-  # - job: Build
-  #   displayName: Build job
-  #   pool: niadak
-  #   steps:
-  #   - script: echo Hello, world! This is CI job
-  #     displayName: 'Run a one-line script'
   - deployment: Deploy
     displayName: Deploy job
     pool: niadak
@@ -53,36 +33,18 @@ stages:
               - script: echo Hello, world! This is deploy job
                 displayName: 'Run a one-line script'
 
-              - task: PublishPipelineArtifact@0
-                displayName: Create Artifact
-                inputs:
-                  artifactName: Artifact1
-                  targetPath: Test
+              - upload: DownloadArtifact-validation-Pipeline.Yaml
+                artifact: Artifact2
 
-  # - deployment: Deploy3
-  #   displayName: Deploy3 job
-  #   pool: niadak
-  #   environment: NiadakEnvironment01
-  #   strategy:
-  #       runOnce:
-  #         deploy:
-  #           steps:
-  #             - script: echo Hello, world! This is deploy job
-  #               displayName: 'Run a one-line script'
-  #             - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
-  #               displayName: Explore workspace
-
-  # - deployment: Deploy4
-  #   displayName: Deploy4 job
-  #   pool: niadak
-  #   environment: NiadakEnvironment01
-  #   strategy:
-  #       runOnce:
-  #         deploy:
-  #           steps:
-  #             - script: echo Hello, world! This is deploy job
-  #               displayName: 'Run a one-line script'
-  #             - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
-  #               displayName: Explore workspace
-
-
+  - deployment: Deploy2
+    displayName: Deploy2 job
+    pool: niadak
+    environment: NiadakEnvironment01
+    strategy:
+        runOnce:
+          deploy:
+            steps:
+              - script: echo Hello, world! This is deploy job
+                displayName: 'Run a one-line script'
+              - powershell: ls $(Pipeline.Workspace) -r #Check the content of the workspace directory
+                displayName: Explore workspace
