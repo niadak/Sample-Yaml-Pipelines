@@ -20,6 +20,8 @@ stages:
   jobs:
   - deployment: Deploy
     displayName: Deploy job
+    variables:
+    - group: Niadak-VG-01
     pool: niadak
     environment: NiadakEnvironment01
     strategy:
