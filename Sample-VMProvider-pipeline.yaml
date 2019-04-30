@@ -4,7 +4,7 @@ stages:
   jobs:  
   - job: Build
     displayName: Build job
-    pool: default
+    pool: niadak
     steps:
     - script: echo Hello, world!
       displayName: 'Run a one-line script'
@@ -19,7 +19,7 @@ stages:
   jobs:  
   - deployment: VMDeploy
     displayName: Deploy to VM job
-    environment: Environment01.VMGroup01
+    environment: Fabrikam.DevMachines
     strategy:
       rolling:
         maxBatchSize: 2
