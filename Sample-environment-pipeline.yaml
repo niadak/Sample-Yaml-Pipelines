@@ -25,5 +25,5 @@ stages:
         runOnce:
           deploy:
             steps:
-              - script: echo Hello, world! This is deploy job
-                displayName: 'Run a one-line script'
+            - script: echo Hello, world! This is deploy job
+              displayName: 'Run a one-line script'
