@@ -19,7 +19,10 @@ stages:
   jobs:  
   - deployment: Deploy
     displayName: Deploy job
-    pool: niadak
+    pool:
+      name: niadak
+      demands:
+      - Test
     environment: NiadakEnvironment01
     strategy:
         runOnce:
