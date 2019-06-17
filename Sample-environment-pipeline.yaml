@@ -13,7 +13,7 @@ stages:
       displayName: 'Run a one-line script'
 
     - script: |
-        echo Add other tasks to build, test, and deploy your project $(system.jobid), $(system.Name), , $(system.DisplayName).
+        echo Add other tasks to build, test, and deploy your project $(system.jobid), $(system.jobName), $(system.jobDisplayName), system.definitionName.
         echo See https://aka.ms/yaml
       displayName: 'Run a multi-line script'
 
@@ -31,5 +31,5 @@ stages:
         runOnce:
           deploy:
             steps:
-            - script: echo Hello, world! This is deploy job $(system.jobid), $(system.Name), , $(system.DisplayName)
+            - script: echo Hello, world! This is deploy job $(system.jobid), $(system.jobName), $(system.jobDisplayName), system.definitionName
               displayName: 'Run a one-line script'
