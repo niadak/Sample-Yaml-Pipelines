@@ -6,8 +6,6 @@ stages:
     displayName: Build job
     pool:
       name: niadak
-      demands:
-      - Test
     steps:
     - script: echo Hello, world!
       displayName: 'Run a one-line script'
@@ -26,8 +24,6 @@ stages:
     displayName: Deploy job
     pool:
       name: niadak
-      demands:
-      - Test
     environment: NiadakEnvironment01
     strategy:
         runOnce:
