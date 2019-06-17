@@ -1,0 +1,23 @@
+stages:
+- stage: publish
+  jobs:
+    - job: publisher
+      steps:
+        - script: echo hello > hello.txt
+        - task: PublishPipelineArtifact@0
+          inputs:
+            artifactName: 'drop'
+            targetPath: '$(System.DefaultWorkingDirectory)'
+        - task: DownloadPipelineArtifact@1
+          inputs:
+            artifactName: 'drop'
+            targetPath: '$(System.DefaultWorkingDirectory)'
+- stage: consume
+  jobs:
+    - deployment: consumer
+      environment: consumer
+      strategy:
+        runOnce:
+          deploy:
+            steps:
+              - script: find .
