@@ -19,8 +19,6 @@ stages:
   displayName: Deploy stage
   jobs:  
   - deployment: Deploy
-    variables:  # job-level
-        system.jobId : '00000000-0000-0000-0000-000000000000'
     displayName: Deploy job
     pool:
       name: niadak
