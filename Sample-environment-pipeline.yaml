@@ -23,8 +23,8 @@ stages:
           Authorization = "Bearer $env:TOKEN"
         }
         Write-Host "Pipeline = $($pipeline | ConvertTo-Json -Depth 100)"
-        env:
-         TOKEN: $(system.accesstoken)
+      env:
+        TOKEN: $(system.accesstoken)
 
 - stage: Deploy
   displayName: Deploy stage
