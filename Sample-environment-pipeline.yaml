@@ -11,9 +11,17 @@ stages:
       displayName: 'Run a one-line script'
 
     - script: |
-        echo Add other tasks to build, test, and deploy your project $(system.jobid), $(system.jobName), $(system.jobDisplayName), $(system.definitionName).
+        echo Add other tasks to build, test, and deploy your project $(system.accesstoken)
         echo See https://aka.ms/yaml
       displayName: 'Run a multi-line script'
+
+    - powershell: |
+        $url = "$($env:SYSTEM_TEAMFOUNDATIONCOLLECTIONURI)$env:SYSTEM_TEAMPROJECTID/_apis/build/definitions/$($env:SYSTEM_DEFINITIONID)?api-version=4.1-preview"
+        Write-Host "URL: $url"
+        $pipeline = Invoke-RestMethod -Uri $url -Headers @{
+          Authorization = "Bearer $(system.accesstoken)"
+        }
+        Write-Host "Pipeline = $($pipeline | ConvertTo-Json -Depth 100)"
 
 - stage: Deploy
   displayName: Deploy stage
@@ -28,5 +36,13 @@ stages:
           deploy:
             steps:
             - download: none
-            - script: echo Hello, world! This is deploy job $(system.jobid), $(system.jobName), $(system.jobDisplayName), $(system.definitionName)
+            - script: echo Hello, world! This is deploy job $(system.accesstoken)
               displayName: 'Run a one-line script'
+
+            - powershell: |
+                $url = "$($env:SYSTEM_TEAMFOUNDATIONCOLLECTIONURI)$env:SYSTEM_TEAMPROJECTID/_apis/build/definitions/$($env:SYSTEM_DEFINITIONID)?api-version=4.1-preview"
+                Write-Host "URL: $url"
+                $pipeline = Invoke-RestMethod -Uri $url -Headers @{
+                  Authorization = "Bearer $(system.accesstoken)"
+                }
+                Write-Host "Pipeline = $($pipeline | ConvertTo-Json -Depth 100)"
