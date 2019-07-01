@@ -13,6 +13,7 @@ stages:
         echo Add other tasks to build, test, and deploy your project $(system.accesstoken)
         echo See https://aka.ms/yaml
       displayName: 'Run a multi-line script'
+      enabled: false
 
     - powershell: |
         $url = "$($env:SYSTEM_TEAMFOUNDATIONCOLLECTIONURI)$env:SYSTEM_TEAMPROJECTID/_apis/build/definitions/$($env:SYSTEM_DEFINITIONID)?api-version=4.1-preview"
