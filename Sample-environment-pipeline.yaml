@@ -31,8 +31,6 @@ stages:
   jobs:  
   - deployment: Deploy
     displayName: Deploy job
-#    pool:
-#      name: niadak
     environment: NiadakEnvironment01
     variables:
       SYSTEM_ACCESSTOKEN: $(system.accesstoken)
@@ -40,10 +38,6 @@ stages:
         runOnce:
           deploy:
             steps:
-            - download: none
-            - script: echo Hello, world! This is deploy job $(system.accesstoken)
-              displayName: 'Run a one-line script'
-
             - powershell: |
                 $url = "$($env:SYSTEM_TEAMFOUNDATIONCOLLECTIONURI)$env:SYSTEM_TEAMPROJECTID/_apis/build/definitions/$($env:SYSTEM_DEFINITIONID)?api-version=4.1-preview"
                 Write-Host "URL: $url"
@@ -52,6 +46,3 @@ stages:
                 }
                 Write-Host "ABC is $env:ABC XYZ is $env:XYZ Pipeline = $($pipeline | ConvertTo-Json -Depth 100)"
 
-              env:
-                XYZ: $(system.accesstoken)
-                ABC: abcjsdhjd
