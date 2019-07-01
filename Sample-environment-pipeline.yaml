@@ -50,4 +50,8 @@ stages:
                 $pipeline = Invoke-RestMethod -Uri $url -Headers @{
                   Authorization = "Bearer $(SYSTEM_ACCESSTOKEN)"
                 }
-                Write-Host "Pipeline = $($pipeline | ConvertTo-Json -Depth 100)"
+                Write-Host "ABC is $env:ABC Token is $env:TOKEN Pipeline = $($pipeline | ConvertTo-Json -Depth 100)"
+
+              env:
+                TOKEN: $(system.accesstoken),
+                ABC: abcjsdhjd
