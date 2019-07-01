@@ -1,3 +1,4 @@
+trigger: none
 stages:
 - stage: Build
   displayName: Build stage
@@ -28,8 +29,8 @@ stages:
   jobs:  
   - deployment: Deploy
     displayName: Deploy job
-    pool:
-      name: niadak
+#    pool:
+#      name: niadak
     environment: NiadakEnvironment01
     strategy:
         runOnce:
