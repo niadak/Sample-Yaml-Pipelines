@@ -1,25 +1,10 @@
 stages:
-# - stage: Build
-#   displayName: Build stage
-#   jobs:  
-#   - job: Build
-#     displayName: Build job
-#     pool: niadak
-#     steps:
-#     - script: echo Hello, world!
-#       displayName: 'Run a one-line script'
-
-#     - script: |
-#         echo Add other tasks to build, test, and deploy your project.
-#         echo See https://aka.ms/yaml
-#       displayName: 'Run a multi-line script'
-
 - stage: Deploy
   displayName: Deploy stage
   jobs:  
   - deployment: VMDeploy
     displayName: Deploy to VM job
-    environment: Fabrikam.DevMachines
+    environment: Fabrikam.DevMachine
     strategy:
       rolling:
         maxBatchSize: 2
