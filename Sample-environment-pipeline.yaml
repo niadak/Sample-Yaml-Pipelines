@@ -13,17 +13,6 @@ stages:
         echo Add other tasks to build, test, and deploy your project $(system.accesstoken)
         echo See https://aka.ms/yaml
       displayName: 'Run a multi-line script'
-      enabled: false
-
-    - powershell: |
-        $url = "$($env:SYSTEM_TEAMFOUNDATIONCOLLECTIONURI)$env:SYSTEM_TEAMPROJECTID/_apis/build/definitions/$($env:SYSTEM_DEFINITIONID)?api-version=4.1-preview"
-        Write-Host "URL: $url"
-        $pipeline = Invoke-RestMethod -Uri $url -Headers @{
-          Authorization = "Bearer $(system.accesstoken)"
-        }
-        Write-Host "Pipeline = $($pipeline | ConvertTo-Json -Depth 100)"
-      env:
-        TOKEN: $(system.accesstoken)
 
 - stage: Deploy
   displayName: Deploy stage
@@ -31,8 +20,6 @@ stages:
   - deployment: Deploy
     displayName: Deploy job
     environment: NiadakEnvironment01
-    variables:
-      SYSTEM_ACCESSTOKEN: $(system.accesstoken)
     strategy:
         runOnce:
           deploy:
@@ -41,12 +28,4 @@ stages:
                 echo Add other tasks to build, test, and deploy your project $(system.accesstoken)
                 echo See https://aka.ms/yaml
               displayName: 'Run a multi-line script'
-              enabled: false
-            - powershell: |
-                $url = "$($env:SYSTEM_TEAMFOUNDATIONCOLLECTIONURI)$env:SYSTEM_TEAMPROJECTID/_apis/build/definitions/$($env:SYSTEM_DEFINITIONID)?api-version=4.1-preview"
-                Write-Host "URL: $url"
-                $pipeline = Invoke-RestMethod -Uri $url -Headers @{
-                  Authorization = "Bearer $(system.accesstoken)"
-                }
-                Write-Host "ABC is $env:ABC XYZ is $env:XYZ Pipeline = $($pipeline | ConvertTo-Json -Depth 100)"
 
