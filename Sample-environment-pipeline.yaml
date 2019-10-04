@@ -27,5 +27,6 @@ stages:
             - script: |
                 echo Add other tasks to build, test, and deploy your project $(system.accesstoken)
                 echo See https://aka.ms/yaml
+            - powershell: throw "kdjskljkls"
               displayName: 'Run a multi-line script'
 
