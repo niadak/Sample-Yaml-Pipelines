@@ -6,6 +6,7 @@ stages:
   jobs:  
   - deployment: Deploy
     displayName: Deploy job
+    pool: default
     environment: NiadakEnvironment01
     strategy:
       runOnce:
