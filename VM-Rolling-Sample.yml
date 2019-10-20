@@ -1,0 +1,46 @@
+trigger: none
+stages:
+- stage: Deploy
+  displayName: Deploy stage
+  jobs:  
+  - deployment: VMDeploy
+    displayName: Deploy to VM job
+    pool: Default
+    environment:
+      name: Environment2
+      resourceType: VirtualMachine
+    strategy:
+      rolling:
+        maxBatchSize: 2
+        preDeploy:
+          steps:
+            - script: echo Hello, world! This is preDeploy
+              displayName: 'Run a one-line script'
+
+        deploy:
+          steps:
+            - script: echo Hello, world! This is deploy
+              displayName: 'Run a one-line script'
+
+
+        routeTraffic:
+          steps:
+            - script: echo Hello, world! This is routeTraffic
+              displayName: 'Run a one-line script'
+
+        postRouteTraffic:
+          steps:
+            - script: echo Hello, world! This is postRouteTraffic
+              displayName: 'Run a one-line script'
+
+        on:
+          failure:
+            steps:
+            - script: echo Hello, world! This is on failure
+              displayName: 'Run a one-line script'
+
+          success:
+            steps:
+            - script: echo Hello, world! This is on success
+              displayName: 'Run a one-line script'
+
