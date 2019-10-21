@@ -22,7 +22,6 @@ stages:
             - script: echo Hello, world! This is deploy
               displayName: 'Run a one-line script'
 
-
         routeTraffic:
           steps:
             - script: echo Hello, world! This is routeTraffic
