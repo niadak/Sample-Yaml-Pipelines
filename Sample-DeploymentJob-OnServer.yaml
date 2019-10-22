@@ -1,0 +1,12 @@
+- stage: Deploy
+  displayName: Deploy stage
+  jobs:  
+  - deployment: Deploy
+    displayName: Deploy job
+    environment: NiadakEnvironment01
+    pool: server
+    strategy:
+        runOnce:
+          deploy:
+            steps:
+            - delay:1
