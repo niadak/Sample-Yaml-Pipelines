@@ -1,1 +1,1 @@
-Get-AzResource
+Get-AzResource -Name rklinuxvm
