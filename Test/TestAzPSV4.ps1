@@ -1,1 +1,1 @@
-Get-AzResource -Name rklinuxvm
+Get-AzResource -ResourceGroupName ROKRESOURCEGROUP
