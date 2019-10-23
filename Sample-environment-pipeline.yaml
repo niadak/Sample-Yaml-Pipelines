@@ -6,7 +6,7 @@ stages:
   - deployment: Deploy
     displayName: Deploy job
     environment: NiadakEnvironment01
-    pool: VS2017
+    pool: Hosted VS2017
     #  vmImage: 'vs2017-win2016'
     strategy:
         runOnce:
