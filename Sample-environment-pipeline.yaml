@@ -12,8 +12,7 @@ stages:
         runOnce:
           deploy:
             steps:
-            - script: |
-                echo Add other tasks to build, test, and deploy your project $(system.accesstoken)
-                echo See https://aka.ms/yaml
-              displayName: 'Run a multi-line script'
-
+            - task: Xcode@5
+              inputs:
+                actions: 'build'
+                packageApp: false
