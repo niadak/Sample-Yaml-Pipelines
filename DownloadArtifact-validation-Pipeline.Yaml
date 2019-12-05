@@ -1,10 +1,12 @@
+trigger: none
+
 stages:
 - stage: Build
   displayName: Build1 stage
   jobs:  
   - job: Build
     displayName: Build job
-    pool: niadak
+    pool: default
     steps:
     - script: echo Hello, world! This is CI job
       displayName: 'Run a one-line script'
@@ -17,7 +19,7 @@ stages:
 
   - job: Build2
     displayName: Build2 job
-    pool: niadak
+    pool: default
     steps:
       - script: echo Hello, world! This is CI job
         displayName: 'Run a one-line script'
@@ -33,15 +35,12 @@ stages:
   jobs:
   - deployment: Deploy
     displayName: Deploy job
-    variables:
-    - group: Niadak-VG-01
-    pool: niadak
+    pool: default
     environment: NiadakEnvironment01
     strategy:
         runOnce:
           deploy:
             steps:
-              - checkout: self
               - script: echo Hello, world! This is deploy job
                 displayName: 'Run a one-line script'
 
@@ -50,7 +49,7 @@ stages:
 
   - deployment: Deploy2
     displayName: Deploy2 job
-    pool: niadak
+    pool: default
     environment: NiadakEnvironment01
     strategy:
         runOnce:
@@ -59,8 +58,39 @@ stages:
             - script: echo Hello, world! This is CI job
               displayName: 'Run a one-line script'
 
-            - task: PublishPipelineArtifact@0
-              displayName: Create Artifact
-              inputs:
-                artifactName: Artifact1
-                targetPath: Test
+  - deployment: VMDeploy
+    displayName: web
+    environment:
+      name: Environment02
+      resourceType: VirtualMachine
+    strategy:
+      runOnce:
+        preDeploy:
+          steps:
+            - script: echo Hello, world! This is pre-deploy
+              displayName: 'Run a one-line script'
+        deploy:
+          steps:
+          - script: echo Hello, world! This is deploy
+            displayName: 'Run a one-line script' 
+
+        routeTraffic:
+          steps:
+            - script: echo Hello, world! This is routeTraffic
+              displayName: 'Run a one-line script'
+
+        postRouteTraffic:
+          steps:
+            - script: echo Hello, world! This is postRouteTraffic
+              displayName: 'Run a one-line script'
+
+        on:
+          failure:
+            steps:
+            - script: echo Hello, world! This is on failure
+              displayName: 'Run a one-line script'
+
+          success:
+            steps:
+            - script: echo Hello, world! This is on success
+              displayName: 'Run a one-line script'
