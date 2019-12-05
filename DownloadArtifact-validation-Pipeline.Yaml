@@ -75,7 +75,8 @@ stages:
       name: Environment02
       resourceType: VirtualMachine
     strategy:
-      runOnce:
+      rolling:
+        maxParallel: 1
         preDeploy:
           steps:
             - script: echo Hello, world! This is pre-deploy
