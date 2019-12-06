@@ -43,6 +43,7 @@ stages:
             steps:
               - script: echo Hello, world! This is pre-deploy
                 displayName: 'Run a one-line script'
+              - powershell: sleep(300)
           deploy:
             steps:
             - script: echo Hello, world! This is deploy
@@ -57,6 +58,7 @@ stages:
             steps:
               - script: echo Hello, world! This is postRouteTraffic
                 displayName: 'Run a one-line script'
+              - powershell: sleep(300)
 
           on:
             failure:
@@ -90,6 +92,7 @@ stages:
           steps:
             - script: echo Hello, world! This is routeTraffic
               displayName: 'Run a one-line script'
+            - powershell: sleep(300)
 
         postRouteTraffic:
           steps:
