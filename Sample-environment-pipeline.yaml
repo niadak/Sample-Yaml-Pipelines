@@ -6,13 +6,10 @@ stages:
   - deployment: Deploy
     displayName: Deploy job
     environment: NiadakEnvironment01
-    pool:
-      vmImage: 'ubuntu-18.04'
+    pool: Default
     strategy:
         runOnce:
           deploy:
             steps:
-            - task: Xcode@5
-              inputs:
-                actions: 'build'
-                packageApp: false
+            - script: echo Hello, world! This is deploy
+              displayName: 'Run a one-line script'
