@@ -72,7 +72,7 @@ stages:
   - deployment: VMDeploy
     displayName: web
     environment:
-      name: Environment02
+      name: NiadakEnvironment01
       resourceType: VirtualMachine
     strategy:
       rolling:
