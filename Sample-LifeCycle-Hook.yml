@@ -39,3 +39,12 @@ stages:
             steps:
             - script: echo Hello, world! This is on success
               displayName: 'Run a one-line script'
+
+
+  - deployment: Deploy
+    displayName: Deploy job
+    #pool: default
+    environment: NiadakEnvironment01
+    strategy:
+      runOnce:
+          
