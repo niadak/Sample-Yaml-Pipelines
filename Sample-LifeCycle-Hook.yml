@@ -4,6 +4,17 @@ stages:
 - stage: Deploy
   displayName: Deploy stage
   jobs:  
+  - job: Build
+    strategy:
+      matrix:
+        Python35:
+          PYTHON_VERSION: '3.5'
+        Python36:
+          PYTHON_VERSION: '3.6'
+    steps:
+      - script: echo Hello, world! This is pre-deploy
+        displayName: 'Run a one-line script'
+
   - deployment: Deploy
     displayName: Deploy job
     #pool: default
