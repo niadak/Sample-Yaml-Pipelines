@@ -11,7 +11,7 @@ stages:
       resourceType: VirtualMachine
     strategy:
       rolling:
-        maxBatchSize: 2
+        maxParallel: 2
         deploy:
           steps:
             - script: echo Hello, world! This is deploy
