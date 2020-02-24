@@ -2,7 +2,12 @@ trigger: none
 stages:
 - stage: Deploy
   displayName: Deploy stage
-  jobs:  
+  jobs:
+  - job: CI
+    steps:
+    - script: echo Hello, world! This is CI
+      displayName: 'Run a one-line script'
+
   - deployment: Deploy
     displayName: Deploy job
     environment: NiadakEnvironment01
