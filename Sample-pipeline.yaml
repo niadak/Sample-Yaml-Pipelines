@@ -4,6 +4,7 @@ stages:
   displayName: Build stage
   jobs:  
   - job: Build
+    # pool: default
     displayName: Build job
     steps:
     - script: echo Hello, world!
@@ -18,6 +19,7 @@ stages:
   displayName: QA stage
   jobs:  
   - job: Test
+    pool: HostedVS2017
     displayName: QA job
     steps:
     - script: echo Hello, world! This is testing
