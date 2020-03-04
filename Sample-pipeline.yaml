@@ -19,7 +19,6 @@ stages:
   displayName: QA stage
   jobs:  
   - job: Test
-    pool: HostedVS2017
     displayName: QA job
     steps:
     - script: echo Hello, world! This is testing
