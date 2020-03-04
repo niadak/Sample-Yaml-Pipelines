@@ -1,10 +1,10 @@
+trigger: none
 stages:
 - stage: Build
   displayName: Build stage
   jobs:  
   - job: Build
     displayName: Build job
-    pool: default
     steps:
     - script: echo Hello, world!
       displayName: 'Run a one-line script'
@@ -19,7 +19,6 @@ stages:
   jobs:  
   - job: Test
     displayName: QA job
-    pool: default
     steps:
     - script: echo Hello, world! This is testing
       displayName: 'Run a one-line script'
